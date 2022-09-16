@@ -1,0 +1,61 @@
+﻿@model IEnumerable<SalesManagement.Models.Cart>
+
+@{
+    ViewBag.Title = "ListCarts";
+}
+
+<h2>ListCarts</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "Product", new { id = item.ProductID }, null)">Details</a>|
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            </td>
+        </tr>
+    }
+    <tr>
+        <th>the number of products:  @ViewBag.productNumber</th>
+        <th colspan="4">Money:  @String.Format("{0:0.00}", ViewBag.Total)VND</th>
+        <td>@Html.ActionLink("Order", "Order")</td>
+    </tr>
+</table>
